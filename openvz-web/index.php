@@ -22,36 +22,22 @@
 	<button id="btn-create">Create CT</button>
 	<button id="btn-delete">Delete CT</button>
 	<br>
-	<p>Info: &nbsp;<b id="ingfo"></b><p id='count'></p></p>
+	<p>Info: &nbsp;<b id="ingfo"></b></p>
 
 </body>
-
+<script type="text/javascript" src="js/manipulateContainer.js"></script>
 <script type="text/javascript">
-	let list = document.getElementById('list')
-	let ingfo = document.getElementById('ingfo')
-	let count = document.getElementById('count')
+	let ctid = 5;
+	listnya = `<?php echo $ct->vzlist();?>`;
 	
-	list.innerHTML = `<?php echo $ct->vzlist();?>`;
+	listContainer(listnya);
 
 	$("#btn-create").on('click',function(){
-		ingfo.innerHTML = "Container sedang dibuat..."
-
-		$.post('process/container_post_process.php',{ create_CTID: 4 },function(data){
-			jsonData = JSON.parse(data);
-
-			list.innerHTML  = jsonData['list_updated']
-			ingfo.innerHTML = jsonData['status']
-		})
-	})
+		createContainer(ctid);
+	});
 
 	$("#btn-delete").on('click',function(){
-		ingfo.innerHTML = "Menghapus Container..."
-		$.post('process/container_post_process.php',{ delete_CTID: 4 },function(data){
-			jsonData = JSON.parse(data);
-
-			list.innerHTML  = jsonData['list_updated']
-			ingfo.innerHTML = jsonData['status']
-		})
+		deleteContainer(ctid);
 	});
 
 </script>
